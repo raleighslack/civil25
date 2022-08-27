@@ -1,11 +1,13 @@
   .org 0x3000
+
 start:
   nop
-  mov %al, 0x05
-  mov %ah, %al
-  xor %al, %al
-  xor %ah, %ah
-  jmp start
+
+loop:
+  mov %al, 0x01
+  nop
+  xor %al, 0x00
+  jmp loop
 
   .org 0x3fff0
   jmp start
