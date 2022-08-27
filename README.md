@@ -20,7 +20,6 @@ Currently waiting on some CP80C88's to arrive for me to test with. Not sure that
 
 - Sound Chip - YM3812
 - Add SD Card Interface
-- C Compiler
 - PS/2 Keyboard/Mouse
 - PCB/Case
 - VGA Video Card(maybe an FPGA?)
@@ -30,6 +29,7 @@ Currently waiting on some CP80C88's to arrive for me to test with. Not sure that
 
 ## Future Aditions (Software)
 
+- C Compiler
 - Make BIOS
 - Make basic Kernel
 - Make C Standard Library
