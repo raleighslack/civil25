@@ -1,4 +1,4 @@
-  .org 0x3000
+  .org 0x0
 
 start:
   nop
