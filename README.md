@@ -4,15 +4,13 @@ A 8088 based SBC. 512k of RAM. 256k of ROM.
 
 This is a simple 8088 based SBC that is currently just in a testing phase. I do have plans to really work on this, make schematics, pcb's and everything else but currently I am just having some fun.
 
-`../../../vasm/vasmx86_std -m8086 -Fbin test.s` can be used to compile vasm assembly files within the /software/vasm_testing/ folder  
-
 Current assembler in use is NASM, working on making a way to create proper files for BCC/AS86  
 
 Currently waiting on some CP80C88's to arrive for me to test with. Not sure that the current design works.  
 
 **Update:**
 
-CP80C88's have arrived, and I have done all of the address/data decoding, and have connected a ROM chip (SST39SF020A) to the CPU, and using the arduino monitor in `/software/arduino_monitors`, It all appears to be working correctly. Now I am going to work on the **Currently in progess** goals listed below.
+CP80C88's have arrived, and I have done all of the address/data decoding, and have connected a ROM chip (SST39SF020A) to the CPU, and using the arduino monitor in `/software/arduino_monitors`, It all appears to be working correctly. Ram is also connected and all CS# lines are decoded. Now I am going to work on the **Currently in progess** goals listed below.
 
 
 
@@ -22,15 +20,14 @@ CP80C88's have arrived, and I have done all of the address/data decoding, and ha
 - 2x 74HC373 D-type Octal Latch
 - 1x 74HC245 Bus Trancever
 - 1x SST39SF020A Flash
+- 1x AS6C4008 Ram
+- 1x 82c55A PPI
 - 1x 555 Clock Generator(And supporting circuitry)
 - 100000x Jumper Wires
 
 # Currently in progress
- - RAM
  - YM3812 + DAC
- - I/O Chip (82c55)
  - LCD (attached to 82c55)
-
 
 # Future additions (Hardware)
 
