@@ -10,7 +10,7 @@ Currently waiting on some CP80C88's to arrive for me to test with. Not sure that
 
 **Update:**
 
-CP80C88's have arrived, and I have done all of the address/data decoding, and have connected a ROM chip (SST39SF020A) to the CPU, and using the arduino monitor in `/software/arduino_monitors`, It all appears to be working correctly. Ram is also connected and all CS# lines are decoded. Now I am going to work on the **Currently in progess** goals listed below.
+CP80C88's have arrived, and I have done all of the address/data decoding, and have connected a ROM chip (SST39SF020A) to the CPU, and using the arduino monitor in `/software/arduino_monitors`, It all appears to be working correctly. Ram is also connected and all CS# lines are decoded. 82c55 I/O is connected and working with an LCD printing "Hello, World!". Now I am going to work on the **Currently in progess** goals listed below.
 
 
 
@@ -23,17 +23,18 @@ CP80C88's have arrived, and I have done all of the address/data decoding, and ha
 - 1x AS6C4008 Ram
 - 1x 82c55A PPI
 - 1x 555 Clock Generator(And supporting circuitry)
+- 1x LCD
 - 100000x Jumper Wires
 
 # Currently in progress
  - YM3812 + DAC
- - LCD (attached to 82c55)
+ - PS/2 Keyboard/Mouse - Potentially using Shift Register + I/O Chip + Interrupt Chip
+ - Schematics for current design
 
 # Future additions (Hardware)
 
 - **ADD VIDEO CARD**
 - Add SD Card
-- PS/2 Keyboard/Mouse - Potentially using Shift Register + I/O Chip + Interrupt Chip
 - PCB - Mini ITX - Compatible with ATX PSU's
 - Potentially have some fun with SDRAM (probably not)
 - Ethernet - Currently looking at the `W5100S-L`
