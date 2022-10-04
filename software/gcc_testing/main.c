@@ -2,6 +2,8 @@
 
 int main()
 {
-	int ME = 33;
-	load_al(ME);
+	load_al(72);
+	send_control();
+	send_letter();
+	return 0;
 }
