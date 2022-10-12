@@ -41,7 +41,69 @@ writeLoop:
 		call writeLetter ;writes letter from AL
 		dec cx ;decreses # of characters to write
 		jnz writeLoop ;if its not done, jump back up
-		jmp loop ;otherwise jump to loop
+		jmp playSound ;otherwise jump to loop
+
+playSound:
+		mov al, 0x20 ;set register 20
+		out 04h, al
+		mov al, 00000001b; defines sound MULTI/KSR/EG_TYPE/VIB/AM
+		out 05h, al
+
+		mov al, 0x23; set register 23
+		out 04h, al
+		mov al, 00000001b
+		out 05h, al
+
+		mov al, 0x40; set register 40
+		out 04h, al
+		mov al, 00011111b ;VOlume/Key scale level
+		out 05h, al
+
+		mov al, 0x43; set register 43
+		out 04h, al
+		mov al, 0x00
+		out 05h, al
+
+		mov al, 0x60; set register 60
+		out 04h, al
+		mov al, 0xe4
+		out 05h, al
+
+		mov al, 0x63; set register 63
+		out 04h, al
+		mov al, 0xe4
+		out 05h, al
+
+		mov al, 0x80 ;set register 80
+		out 04h, al
+		mov al, 0x9d
+		out 05h, al
+
+		mov al, 0x83 ;set register 83
+		out 04h, al
+		mov al, 0x9d
+		out 05h, al
+
+		mov al, 0xa0 ;set register a0
+		out 04h, al
+		mov al, 0xae
+		out 05h, al
+
+		mov al, 0xb0
+		out 04h, al
+		mov al, 0x2a ;UUSOOOFF; 00101010
+		out 05h, al
+
+		call delay
+
+		mov al, 0xb0
+		out 04h, al
+		mov al, 0x00
+		out 05h, al
+
+		jmp loop
+
+
 
 writeControl: ;writes to control register of LCD
 		out 00h, al
@@ -51,6 +113,13 @@ writeControl: ;writes to control register of LCD
 		out 01h, al
 		mov al, 0x00 ;Reset pin state; Should be replaced with xor al, al
 		out 01h, al
+		ret
+
+delay:
+		mov cx, 15
+.1:		dec cx
+		jnz .1
+
 		ret
 
 writeLetter: ;writes to data register of LCD
@@ -64,10 +133,22 @@ writeLetter: ;writes to data register of LCD
 		ret
 
 loop:
+		mov al, 0xb0
+		out 04h, al
+		mov al, 00101110b ;UUSOOOFF; 00101010
+		out 05h, al
+
+		call delay
+
+		mov al, 0xb0
+		out 04h, al
+		mov al, 0x00
+		out 05h, al
+
 		jmp loop
 
 message: 
-	db "Hello, world!"
+	db "ding"
 message_end:
 		
 times ROMSIZE-16-($-$$) db 0xFF

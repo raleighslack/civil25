@@ -24,4 +24,4 @@ dump.txt: out.bin
 	$(OBJDUMP) -D -Mintel,i8086 -b binary -m i386 out.bin > dump.txt
 
 clean:
-	rm *.elf *.bin *.o
+	rm *.elf *.bin *.o *.txt

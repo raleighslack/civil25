@@ -3,7 +3,7 @@
 int main()
 {
 	load_al(72);
-	send_control();
-	send_letter();
+	lcd_send_control();
+	lcd_send_letter();
 	return 0;
 }
