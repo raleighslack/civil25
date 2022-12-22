@@ -4,4 +4,5 @@
 *.elf
 *.txt
 *.map
+*.s
 .vs/

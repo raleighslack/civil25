@@ -1,15 +1,16 @@
 DEFINES += CPU_TYPE=86
-GCCFLAGS += -march=i8088 -mtune=i8088 -Os -mcmodel=small $(patsubst %, -D%,$(DEFINES))
+GCCFLAGS += -march=i8088 -mtune=i8088 -mcmodel=small $(patsubst %, -D%,$(DEFINES))
 NASM = nasm
 CC = ia16-elf-gcc
 OBJCOPY = ia16-elf-objcopy
 OBJDUMP = ia16-elf-objdump
 LD = ia16-elf-ld
+LIBS += 
 
-all: main.o lcd.o out.elf out.bin reset.o dump.txt init.o
+all: main.o lcd.o out.elf out.bin reset.o init.o dump.txt
 
 main.o: main.c
-	$(CC) $(GCCFLAGS) -c $<
+	$(CC) $(GCCFLAGS) $(patsubst %,-l%,$(LIBS)) -std=c11 -D_DEFAULT_SOURCE -I ./ -c $< -o $@
 
 lcd.o: lcd.asm
 	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
@@ -20,14 +21,14 @@ reset.o: reset.asm
 init.o: init.asm
 	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
-out.elf: init.o main.o lcd.o reset.o 
-	$(LD) -T makefile.ld -m elf_i386 -s $^ -o $@
+out.elf: init.o main.o lcd.o reset.o
+	$(CC) -T makefile.ld -Wl,--oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) -Wl,-Map=out.map -s $^ -o $@
 
 out.bin: out.elf
 	$(OBJCOPY) -I elf32-little -O binary $< $@
 
-dump.txt: out.bin
-	$(OBJDUMP) -D -Mintel,i8086 -b binary -m i386 out.bin > dump.txt
+dump.txt: out.elf
+	$(OBJDUMP) -d -Mintel,i8086 -s -m i386 $< > $@
 
 clean:
-	rm *.elf *.bin *.o *.txt
+	rm *.elf *.bin *.o *.txt *.map *.s

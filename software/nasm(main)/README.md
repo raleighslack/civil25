@@ -17,3 +17,4 @@ This is the main assembler in use for the moment, until GCC has a bit more funct
 - 0x00 - 0x03: 8255 PPI
 - 0x10 - 0x11: YM3812 FM Sound
 - 0x20 - 0x21: 8259 PIC
+- 0x30 - 0x31: SCN2674 AVDC

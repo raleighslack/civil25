@@ -1,11 +1,11 @@
-#include "lcd.h"
+#include <lcd.h>
 
-int main()
+void main()
 {
 	lcd_send_control(0x38); // Set 8 bit mode, 2-line display, 5x8 font
 	lcd_send_control(0x0f); // Display on, cursor on, blink on
 	lcd_send_control(0x06); // Increment and shift cursor; don't shift display
 	lcd_return_home();
 	lcd_send_letter('a');
-	lcd_send_letter('b');
+	char buffer[15] = "wewe";
 }
