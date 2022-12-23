@@ -3,7 +3,7 @@
 
         SECTION .text
 
-start:
+main:
         cli
         mov ax, 0x7000          ;loads where stack will be; has to be 64k
         mov ss, ax

@@ -14,6 +14,7 @@ init:
         mov ax, 0x7000 ;loads where stack will be; has to be 64k
         mov ss, ax
         xor sp, sp ;sets stack pointer to 0
+        mov es, ax
 
         mov ax, cs
         mov ds, ax
