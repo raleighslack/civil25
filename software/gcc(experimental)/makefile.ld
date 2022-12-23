@@ -28,10 +28,10 @@ SECTIONS
         __ebss = .;
     } >dsegvma
     .reset : AT(0x3FFF0) {
-        FILL(0x90);
+        FILL(0x90)
         KEEP(*(.reset));
         . = 0x000f;
-        BYTE (0x90)
+        BYTE(0x90)
     }
     __dataoffset = LOADADDR(.data) - LOADADDR(.text);
     __ldata = __edata - __sdata;

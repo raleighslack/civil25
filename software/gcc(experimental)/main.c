@@ -7,5 +7,6 @@ void main()
 	lcd_send_control(0x06); // Increment and shift cursor; don't shift display
 	lcd_return_home();
 	lcd_send_letter('a');
-	char buffer[15] = "wewe";
+	char buffer[16] = "HEHE";
+	lcd_print_string(buffer);
 }

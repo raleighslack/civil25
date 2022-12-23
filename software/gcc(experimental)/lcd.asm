@@ -71,10 +71,6 @@ string_loop:
 		add sp, 2
 		jmp string_loop
 end_of_string:
-		xor ax, ax
-		mov al, "@"
-		push ax
-		call lcd_send_letter
 		add sp, 2
 
 		pop si
