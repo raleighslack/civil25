@@ -22,13 +22,13 @@ init.o: init.asm
 	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
 out.elf: init.o main.o lcd.o reset.o
-	$(CC) -T makefile.ld -Wl,--oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) -Wl,-Map=out.map -s $^ -o $@
+	$(LD) -T makefile.ld --oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) -Map=out.map -s $^ -o $@
 
 out.bin: out.elf
 	$(OBJCOPY) -I elf32-little -O binary $< $@
 
 dump.txt: out.elf
-	$(OBJDUMP) -d -Mintel,i8086 -s -m i386 $< > $@
+	$(OBJDUMP) -d -S -Mintel,i8086 -s -m i386 $< > $@
 
 clean:
 	rm *.elf *.bin *.o *.txt *.map *.s
