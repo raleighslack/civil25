@@ -15,7 +15,7 @@ reset.o: reset.asm
 	nasm -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
 $(PROGRAM).elf: $(PROGRAM).o reset.o
-	$(CC) -T makefile.ld -nostartfiles -Wl,-Map=out.map -Wl,--oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) $^ -o $@
+	$(LD) -T makefile.ld -Map=out.map --oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) $^ -o $@
 
 out.bin: $(PROGRAM).elf
 	$(OBJCOPY) -I elf32-little -O binary $< $@

@@ -11,22 +11,22 @@ MEMORY
 SECTIONS
 {
     .text : {
-        __stext = .;
+        __stext = ABSOLUTE(.);
         *(.startup)
         KEEP(*(.init))
         *(.text) *(.text.*)
-        __etext = .;
+        __etext = ABSOLUTE(.);
     } >tsegvma AT >ROM
     .data : {
-        __sdata = .;
+        __sdata = ABSOLUTE(.);
         *(.rodata) *(.rodata.*)
         *(.data) *(.text.*)
-        __edata = .;
+        __edata = ABSOLUTE(.);
     } >dsegvma AT >ROM
     .bss (NOLOAD) : {
-        __sbss = .;
+        __sbss = ABSOLUTE(.);
         *(.bss) *(.bss.*)
-        __ebss = .;
+        __ebss = ABSOLUTE(.);
     } >dsegvma
     .resetvec : AT(0x3fff0) {
         FILL(0xff);
@@ -35,6 +35,6 @@ SECTIONS
         BYTE (0xff)
 	}
     __dataoffset = LOADADDR(.data) - LOADADDR(.text);
-    __ldata = __edata - __sdata;
-    __lbss = __ebss - __sbss;
+    __ldata = SIZEOF(.data);
+    __lbss = SIZEOF(.bss);
 }
