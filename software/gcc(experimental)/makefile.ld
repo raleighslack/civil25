@@ -5,35 +5,36 @@ MEMORY
     ROM (rx) : ORIGIN = 0x00000, LENGTH = 256K
     tsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
     dsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
+    bsegvma (rx) : ORIGIN = 0x3FFF0, LENGTH = 0x00010
 }
 
 SECTIONS
 {
     .text : {
-        __stext = .;
+        __stext = ABSOLUTE(.);
         *(.startup)
         KEEP(*(.init))
         *(.text) *(.text.*)
-        __etext = .;
+        __etext = ABSOLUTE(.);
     } >tsegvma AT >ROM
     .data : {
-        __sdata = .;
+        __sdata = ABSOLUTE(.);
         *(.rodata) *(.rodata.*)
         *(.data) *(.text.*)
-        __edata = .;
+        __edata = ABSOLUTE(.);
     } >dsegvma AT >ROM
     .bss (NOLOAD) : {
-        __sbss = .;
+        __sbss = ABSOLUTE(.);
         *(.bss) *(.bss.*)
-        __ebss = .;
+        __ebss = ABSOLUTE(.);
     } >dsegvma
-    .reset : AT(0x3FFF0) {
+    .resetvec : AT(0x3fff0){
         FILL(0x90);
         KEEP(*(.reset));
-        . = 0x000f;
-        BYTE (0x90)
-    }
+        . = 0x0000F;
+        BYTE(0x90);
+	}
     __dataoffset = LOADADDR(.data) - LOADADDR(.text);
-    __ldata = __edata - __sdata;
-    __lbss = __ebss - __sbss;
+    __ldata = SIZEOF(.data);
+    __lbss = SIZEOF(.bss);
 }

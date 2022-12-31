@@ -6,3 +6,5 @@
 *.map
 *.s
 .vs/
+.git/
+.vscode/
