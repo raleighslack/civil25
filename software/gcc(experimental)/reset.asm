@@ -1,9 +1,10 @@
         CPU 8086
         BITS 16
 
-        SECTION .reset
+        SECTION .resetvec
 
         GLOBAL reset
+
         EXTERN init
         
 

@@ -5,7 +5,7 @@ MEMORY
     ROM (rx) : ORIGIN = 0x00000, LENGTH = 256K
     tsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
     dsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
-    bsegvma (rx) : ORIGIN = 0x3FFF0, LENGTH = 1K
+    bsegvma (rx) : ORIGIN = 0x3FFF0, LENGTH = 0x00010
 }
 
 SECTIONS
@@ -28,11 +28,11 @@ SECTIONS
         *(.bss) *(.bss.*)
         __ebss = ABSOLUTE(.);
     } >dsegvma
-    .resetvec : AT(0x3fff0) {
-        FILL(0xff);
+    .resetvec : AT(0x3fff0){
+        FILL(0x90);
         KEEP(*(.reset));
-        . = 0x000f;
-        BYTE (0xff)
+        . = 0x0000F;
+        BYTE(0x90);
 	}
     __dataoffset = LOADADDR(.data) - LOADADDR(.text);
     __ldata = SIZEOF(.data);

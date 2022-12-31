@@ -21,13 +21,13 @@ main:
         mov al, 0x00            ;Sets control register of lcd to 0; just to be safe
         out 02h, al
 
-        mov al, 00111000b       ;Set 8 bit mode, 2-line display, 5x8 font
+        mov al, 00111000b       ;Set 8 bit mode, 2-line display, 5x8 font;38
         call writeControl
 
-        mov al, 00001111b       ;Display on, cursor on, blink on
+        mov al, 00001111b       ;Display on, cursor on, blink on;0f
         call writeControl
 
-        mov al, 00000110b       ;Increment and shift cursor; don't shift display
+        mov al, 00000110b       ;Increment and shift cursor; don't shift display;06
         call writeControl       ;Write to control register of LCD
 
         mov al, 00000010b       ;Go to home
