@@ -1,7 +1,7 @@
 #include <lcd.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <math.h>
+#include <string.h>
 
 void lcd_init()
 {

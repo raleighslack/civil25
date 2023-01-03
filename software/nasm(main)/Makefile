@@ -3,8 +3,6 @@ DEFINES += CPU_TYPE=86
 LD = ia16-elf-ld
 CC = ia16-elf-gcc
 OBJCOPY = ia16-elf-objcopy
-LIBS +=
-
 
 all: $(PROGRAM).o reset.o $(PROGRAM).elf out.bin dump.txt
 
@@ -15,13 +13,13 @@ reset.o: reset.asm
 	nasm -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
 $(PROGRAM).elf: $(PROGRAM).o reset.o
-	$(LD) -T makefile.ld -Map=out.map --oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) $^ -o $@
+	$(LD) -T makefile.ld -Map=out.map --oformat=elf32-i386  $^ -o $@
 
 out.bin: $(PROGRAM).elf
 	$(OBJCOPY) -I elf32-little -O binary $< $@
 
-dump.txt: out.bin
-	ia16-elf-objdump -D -Mintel,i8086 -b binary -m i386 $< > $@
+dump.txt: $(PROGRAM).elf
+	ia16-elf-objdump -D -m i8086 -M i8086,intel,intel-mnemonic $< > $@
 
 clean:
 	rm -f $(PROGRAM).o reset.o $(PROGRAM).elf out.bin dump.txt $(PROGRAM).map

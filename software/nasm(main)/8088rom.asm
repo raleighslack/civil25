@@ -3,10 +3,6 @@
 
         SECTION .text
 
-KB_BUFFER       EQU 0x01000
-KB_WPTR         EQU 0x0000
-KB_RPTR         EQU 0x00001
-
 main:
         cli
         mov ax, 0x7000          ;loads where stack will be; has to be 64k
