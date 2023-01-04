@@ -14,11 +14,12 @@ void lcd_init()
 	lcd_return_home();
 }
 
-void main()
+void main() // does memtest and prints out 512K
 {
 	lcd_init();
 	uint16_t ramSize = ramtest();
-	char buffer[sizeof(uint16_t) * 8 + 1];
-	utoa(ramSize, buffer, 1);
+	char *buffer;
+	utoa(ramSize, buffer, 10);
 	lcd_print_string(buffer);
+	lcd_send_letter('K');
 }
