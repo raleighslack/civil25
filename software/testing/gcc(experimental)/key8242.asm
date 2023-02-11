@@ -83,7 +83,7 @@ key_get_output:
 		push bp
 		mov bp, sp
 
-        in al, 41
+        in al, 40
 
 		mov sp, bp
 		pop bp

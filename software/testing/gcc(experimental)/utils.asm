@@ -3,6 +3,22 @@
 
 		SECTION .text
 		GLOBAL ramtest
+                GLOBAL delay
+
+;--------------------------------------
+; void delay(uint16_t steps);
+;--------------------------------------
+delay:
+        push bp
+        mov bp, sp
+
+        mov cx, [bp + 2]
+.1:     dec cx
+        jnz .1
+
+        mov sp, bp
+        pop bp
+        ret
 
 ;--------------------------------------
 ; uint16_t ramtest();

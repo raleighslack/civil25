@@ -62,4 +62,11 @@ void main() // does memtest and prints out 512K
 
 	key_enable();
 	key_reset();
+	key_reset();
+	while (true)
+	{
+		char inputCharacter = key_get_output();
+		lcd_send_letter(inputCharacter);
+		delay(15000);
+	}
 }
