@@ -10,6 +10,7 @@
         EXTERN __sbss
 
         EXTERN main
+        EXTERN init_int_vectors
 init:
         mov ax, 0x7000 ;loads where stack will be; has to be 64k
         mov ss, ax
@@ -33,6 +34,8 @@ init:
         mov di, __sbss
         mov cx, __lbss
         rep stosb
+
+        call init_int_vectors
 
         mov ax, ss
         mov ds, ax

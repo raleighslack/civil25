@@ -14,12 +14,27 @@ void lcd_init()
 	lcd_return_home();
 }
 
+bool checkMemory()
+{
+	uint16_t ramSize = ramtest();
+
+	if (!ramSize || ramSize != 512)
+		return EXIT_FAILURE;
+
+	return EXIT_SUCCESS;
+}
+
 void main() // does memtest and prints out 512K
 {
 	lcd_init();
-	uint16_t ramSize = ramtest();
+
+	if (checkMemory() != EXIT_SUCCESS)
+	{
+		lcd_print_string("No mommy!");
+	}
+
 	char *buffer;
-	utoa(ramSize, buffer, 10);
+	utoa(ramtest(), buffer, 10);
 	lcd_print_string(buffer);
 	lcd_send_letter('K');
 }

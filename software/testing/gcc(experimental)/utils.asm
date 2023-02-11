@@ -8,8 +8,8 @@
 ; uint16_t ramtest();
 ;--------------------------------------
 ramtest:
-		push bp
-		mov bp, sp
+	push bp
+	mov bp, sp
         push ds
 
         xor bx, bx
@@ -42,6 +42,6 @@ ramFail:
         mul bx
 
         pop ds
-		mov sp, bp
-		pop bp
-		ret
+	mov sp, bp
+	pop bp
+	ret

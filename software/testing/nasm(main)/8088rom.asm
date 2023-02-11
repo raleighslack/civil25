@@ -228,10 +228,6 @@ loop:                           ;this just plays the YM3812 in a loop
         mov al, 0x00
         out 0x11, al
 
-        mov al, KB_RPTR
-        cmpsb 
-
-
         jmp loop
 
 message: 

@@ -8,7 +8,7 @@ CXX = ia16-elf-g++
 LD = ia16-elf-ld
 LIBS += c nosys
 
-all: main.o lcd.o out.elf out.bin reset.o init.o utils.o dump.txt
+all: main.o lcd.o out.elf out.bin reset.o init.o int_vect.o utils.o dump.txt
 
 main.o: main.c
 	$(CC) $(GCCFLAGS) $(patsubst %,-l%,$(LIBS)) -std=c11 -D_DEFAULT_SOURCE -I ./ -c -o $@ $< 
@@ -22,10 +22,13 @@ reset.o: reset.asm
 init.o: init.asm
 	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
+int_vect.o: int_vect.asm
+	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
+
 utils.o: utils.asm
 	$(NASM) -f elf $(patsubst %,-D%,$(DEFINES)) -o $@ $<
 
-out.elf: init.o main.o lcd.o reset.o utils.o
+out.elf: init.o main.o lcd.o reset.o utils.o int_vect.o
 	$(CXX) -T makefile.ld -nostartfiles -Wl,-Map=out.map -Wl,--gc-sections -Wl,--oformat=elf32-i386 $(patsubst %,-l%,$(LIBS)) -o $@ $^ 
 
 out.bin: out.elf
