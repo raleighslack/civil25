@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <key8242.h>
 #define _OPEN_SYS_ITOA_EXT
 
 void lcd_init()
@@ -24,6 +25,11 @@ bool checkMemory()
 	return EXIT_SUCCESS;
 }
 
+bool checkKeyboardInput()
+{
+	return false;
+}
+
 void main() // does memtest and prints out 512K
 {
 	lcd_init();
@@ -34,7 +40,26 @@ void main() // does memtest and prints out 512K
 	}
 
 	char *buffer;
+	char *string;
+	char *something;
+
 	utoa(ramtest(), buffer, 10);
 	lcd_print_string(buffer);
 	lcd_send_letter('K');
+
+	key_disable();
+
+	uint8_t status = key_write_command(69);
+	utoa(status, string, 16);
+	lcd_print_string(string);
+
+	uint8_t ye = key_controller_test();
+	utoa(ye, something, 16);
+	lcd_print_string(something);
+
+	char output = key_get_output();
+	lcd_send_letter(output);
+
+	key_enable();
+	key_reset();
 }
