@@ -5,7 +5,6 @@ MEMORY
     ROM (rx) : ORIGIN = 0x00000, LENGTH = 256K
     tsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
     dsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
-    bsegvma (rx) : ORIGIN = 0x3FFF0, LENGTH = 0x00010
 }
 
 SECTIONS
@@ -30,7 +29,11 @@ SECTIONS
     } >dsegvma
     .resetvec : AT(0x3fff0){
         FILL(0x90);
-        KEEP(*(.reset));
+        BYTE(0xEA);
+        BYTE(0x00);
+        BYTE(0x00);
+        BYTE(0xC0);
+        BYTE(0x00);
         . = 0x0000F;
         BYTE(0x90);
 	}
