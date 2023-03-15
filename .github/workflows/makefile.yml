@@ -24,11 +24,6 @@ jobs:
     - name: Check gcc-ia16
       run: ia16-elf-gcc --version
       
-    - name: Enter proper directory
-      run: cd ./software/"gcc(experimental)"
+    - name: Enter proper directory and run make
+      run: cd ./software/"gcc(experimental)" && make
       
-    - name: Get contents of DIR
-      run: ls
-
-    - name: Run makefile for gcc
-      run: make
