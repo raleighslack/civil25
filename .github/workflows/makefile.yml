@@ -8,6 +8,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Install make
+      run: sudo apt-get install make
 
     - name: Add gcc-ia16 repo
       run: sudo add-apt-repository ppa:tkchia/build-ia16
@@ -23,6 +26,9 @@ jobs:
       
     - name: Enter proper directory
       run: cd ./software/"gcc(experimental)"
+      
+    - name: Get contents of DIR
+      run: ls
 
     - name: Run makefile for gcc
-      run: make all
+      run: make
