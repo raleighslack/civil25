@@ -8,9 +8,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Install make
-      run: sudo apt-get install make
 
     - name: Add gcc-ia16 repo
       run: sudo add-apt-repository ppa:tkchia/build-ia16
@@ -19,7 +16,7 @@ jobs:
       run: sudo apt-get update
 
     - name: Install gcc-ia16
-      run: sudo apt-get install gcc-ia16-elf
+      run: sudo apt-get install gcc-ia16-elf make nasm
       
     - name: Check gcc-ia16
       run: ia16-elf-gcc --version
