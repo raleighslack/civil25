@@ -1,0 +1,26 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Add gcc-ia16 repo
+      run: add-apt-repository ppa:tkchia/build-ia16
+
+    - name: Update packages
+      run: sudo apt-get update
+
+    - name: Install gcc-ia16
+      run: sudo apt-get install gcc-ia16-elf
+
+    - name: Run makefile for gcc
+      run: make
