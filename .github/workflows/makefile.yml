@@ -1,10 +1,6 @@
 name: Makefile CI
 
-on:
-  push:
-    branches: [ "master", "dev" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,6 +17,9 @@ jobs:
 
     - name: Install gcc-ia16
       run: sudo apt-get install gcc-ia16-elf
+      
+    - name: Get current directory
+      run: ls
       
     - name: Enter proper directory
       run: cd ./software/gcc(experimental)
