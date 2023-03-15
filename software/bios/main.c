@@ -25,48 +25,14 @@ bool checkMemory()
 	return EXIT_SUCCESS;
 }
 
-bool checkKeyboardInput()
-{
-	return false;
-}
-
 void main() // does memtest and prints out 512K
 {
 	lcd_init();
 
 	if (checkMemory() != EXIT_SUCCESS)
 	{
-		lcd_print_string("No mommy!");
+		lcd_print_string("No memory!");
 	}
 
-	char *buffer;
-	char *string;
-	char *something;
-
-	utoa(ramtest(), buffer, 10);
-	lcd_print_string(buffer);
-	lcd_send_letter('K');
-
-	key_disable();
-
-	uint8_t status = key_write_command(69);
-	utoa(status, string, 16);
-	lcd_print_string(string);
-
-	uint8_t ye = key_controller_test();
-	utoa(ye, something, 16);
-	lcd_print_string(something);
-
-	char output = key_get_output();
-	lcd_send_letter(output);
-
-	key_enable();
-	key_reset();
-	key_reset();
-	while (true)
-	{
-		char inputCharacter = key_get_output();
-		lcd_send_letter(inputCharacter);
-		delay(15000);
-	}
+	lcd_print_string("Hello, World!");
 }
