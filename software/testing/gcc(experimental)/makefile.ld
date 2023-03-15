@@ -5,6 +5,7 @@ MEMORY
     ROM (rx) : ORIGIN = 0x00000, LENGTH = 256K
     tsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
     dsegvma (wx) : ORIGIN = 0x00000, LENGTH = 256K
+    bsegvma (rx) : ORIGIN = 0x3FFF0, LENGTH = 0x00010
 }
 
 SECTIONS

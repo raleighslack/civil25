@@ -1,0 +1,26 @@
+name: Makefile CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Add gcc-ia16 repo
+      run: sudo add-apt-repository ppa:tkchia/build-ia16
+
+    - name: Update packages
+      run: sudo apt-get update
+
+    - name: Install gcc-ia16
+      run: sudo apt-get install gcc-ia16-elf make nasm
+      
+    - name: Check gcc-ia16
+      run: ia16-elf-gcc --version
+      
+    - name: Enter proper directory and run make
+      run: cd ./software/"gcc(experimental)" && make
+      
