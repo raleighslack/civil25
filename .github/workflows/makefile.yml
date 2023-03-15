@@ -18,11 +18,8 @@ jobs:
     - name: Install gcc-ia16
       run: sudo apt-get install gcc-ia16-elf
       
-    - name: Get current directory
-      run: ls
-      
     - name: Enter proper directory
-      run: cd ./software/gcc(experimental)
+      run: cd ./software/"gcc(experimental)"
 
     - name: Run makefile for gcc
       run: make
